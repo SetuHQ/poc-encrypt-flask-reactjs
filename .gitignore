@@ -1,1 +1,3 @@
 **/venv/
+flask-app/keys/*.key
+flask-app/keys/*.pem
