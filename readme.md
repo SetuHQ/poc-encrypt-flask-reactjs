@@ -6,3 +6,13 @@
 
 - wasm build: `wasm-pack build`
 - FE start: `yarn start`
+
+
+```sh
+cargo install wasm-pack
+wasm-pack build --target web
+cargo install cargo-generate
+cargo generate --git https://github.com/rustwasm/wasm-pack-template.git --name mycrypto
+
+
+```

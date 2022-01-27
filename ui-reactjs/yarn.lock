@@ -5763,7 +5763,7 @@ multicast-dns@^6.0.1:
     dns-packet "^1.3.1"
     thunky "^1.0.2"
 
-"mycrypto@file:../wasm/crypto/pkg":
+mycrypto@../wasm/crypto/pkg:
   version "0.1.0"
 
 nanoid@^3.1.30:

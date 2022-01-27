@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://192.168.1.7:5000'
+export const BASE_URL = 'http://192.168.1.46:5000'
 
 export function call_post_api(age, msg, setState) {
     fetch(BASE_URL + '/data', {
