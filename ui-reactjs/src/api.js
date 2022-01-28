@@ -1,3 +1,5 @@
+import * as ecies from './ecies_wasm_bg'
+
 export const BASE_URL = 'http://192.168.1.46:5000'
 
 export function call_post_api(age, msg, setState) {

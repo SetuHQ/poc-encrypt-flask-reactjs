@@ -1,21 +1,8 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import { BASE_URL, call_get_api, call_post_api } from './api'
-import init, { greet } from 'mycrypto'
 
 function App() {
-  const [wasm, setWasm] = useState(undefined)
-
-  useEffect(()=>{
-    const loadWasm = async() => {
-      console.log("loading....")
-      const wasm_ = await init()
-      setWasm(wasm_)
-      console.log("loaded.... ")
-      console.log(wasm_)
-    }
-    loadWasm();
-  }, [])
 
   const [response, setResponse] = useState({})
   const [data, setData] = useState({})
@@ -33,7 +20,7 @@ function App() {
 
   return (
     <div className="App">
-      <div>Greet: {wasm && greet('pp')}</div>
+      {/* <div>Greet: {wasm && greet('pp')}</div> */}
       <button onClick={() => call_get_api(setResponse)}>GET /hello</button>
       <div className='api_response'>
         <div className="text-header">API Response:</div> {JSON.stringify(response)}
