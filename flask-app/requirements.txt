@@ -1,2 +1,3 @@
 flask==2.0.2
 pycryptodome==3.13.0
+eciespy==0.3.11

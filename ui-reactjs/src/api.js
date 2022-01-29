@@ -1,4 +1,4 @@
-import * as ecies from './ecies_wasm_bg'
+import * as ecies from "ecies-wasm";
 
 export const BASE_URL = 'http://192.168.1.46:5000'
 

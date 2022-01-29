@@ -1,4 +1,5 @@
 **/venv/
 **/target/
+**/node_modules/
 flask-app/keys/*.key
 flask-app/keys/*.pem
