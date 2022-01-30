@@ -1,4 +1,5 @@
 # Introduction
+ECC based Encryption/Decryption in JS/wasm and python based app.
 `[ecc, wasm, js, python, rust]`
 
 This is a demo project on encrypted communication between UI & backend over http/s, and delegating all heavy lifting(encryption in this case) to wasm binary compiled from `ecies` rust crate(https://docs.rs/ecies/0.2.1/ecies). The js binding for `ecies` wasm binary is handled with `ecies-wasm` npm package.
@@ -37,7 +38,7 @@ UI is built with reactjs and backend is a flask based api server. Encryption sch
 - Server decrypts base64 encoded payload, decrypts using private-key, send `age`, `msg` back in response.
 
 
-## UsefulCommands:
+## Useful Commands:
 - Create private key: `openssl ecparam -name prime256v1 -genkey -noout -out private.ec.key`
 - Create public key: `openssl ec -in private.ec.key -pubout -out public.pem`
 - Encrypt: `openssl cms -encrypt -binary -aes-256-cbc -in plaintext.dat -out ciphertext.dat p256-cert.pem`
