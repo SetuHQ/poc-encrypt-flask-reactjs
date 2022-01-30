@@ -1,6 +1,7 @@
 from crypt import methods
 from email import header
 import imp
+import json
 from flask import Flask, request
 import uuid
 from ecies import PrivateKey, decrypt
@@ -27,18 +28,14 @@ def create_app():
 
 
     @app.route('/data', methods=['POST'])
-    def get_data():
+    def post_data():
         req = request.json
         print(f"data: {req['data']}")
         with open("./keys/private.ec.key", "rb") as f:
             key = PrivateKey.from_pem(bytearray(f.read()))
-            
-            # print(f"Type: {type(bytearray(f.read()))}")
-            # print(decrypt(bytes(bytearray(f.read())), req['data']))
-            dummy_enc = 'BE4BsJxdekhQV5jjTZ2WrxwQ8eB/rmM98nA2HxEkDzJ7Xq7gefG45gJ1oij/AMHB7nrca5LQJUuUPlw9X/Bw3Vh4iATeiebE/70GeGha36lOHqIA3nYmV3aNn3zz2bjt+96A6sSYZmhNqq8vdP5d2GObkx4x/KdW'
-            data = base64.b64decode(dummy_enc.encode('ascii'))
-            print(f"Data :{data.decode('ascii')}")
-            print(decrypt(key.to_hex(), data))
+            data = base64.b64decode(req['data'].encode('ascii'))
+            req_str = decrypt(key.secret, data).decode('utf-8')
+            req = json.loads(req_str)
         return {
             'id': uuid.uuid4(),
             'name': 'John Doe',
