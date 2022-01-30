@@ -1,12 +1,10 @@
-from crypt import methods
-from email import header
-import imp
 import json
 from flask import Flask, request
 import uuid
-from ecies import PrivateKey, decrypt
+from ecies import decrypt
 import codecs
 import base64
+from key_manager import keys
 
 
 
@@ -19,11 +17,8 @@ def create_app():
 
     @app.route("/pubkey")
     def pub_key():
-        p_key_b64 = ''
-        with open("./keys/private.ec.key", "rb") as f:
-            s_key = PrivateKey.from_pem(bytearray(f.read()))
-            p_key_hex = ''.join('{:02x}'.format(x) for x in s_key.public_key.format(True))
-            p_key_b64 = codecs.encode(codecs.decode(p_key_hex, 'hex'), 'base64').decode()
+        p_key_hex = ''.join('{:02x}'.format(x) for x in keys.private_key.public_key.format(True))
+        p_key_b64 = codecs.encode(codecs.decode(p_key_hex, 'hex'), 'base64').decode()
         return p_key_b64
 
 
@@ -31,11 +26,9 @@ def create_app():
     def post_data():
         req = request.json
         print(f"data: {req['data']}")
-        with open("./keys/private.ec.key", "rb") as f:
-            key = PrivateKey.from_pem(bytearray(f.read()))
-            data = base64.b64decode(req['data'].encode('ascii'))
-            req_str = decrypt(key.secret, data).decode('utf-8')
-            req = json.loads(req_str)
+        data = base64.b64decode(req['data'].encode('ascii'))
+        req_str = decrypt(keys.private_key.secret, data).decode('utf-8')
+        req = json.loads(req_str)
         return {
             'id': uuid.uuid4(),
             'name': 'John Doe',
