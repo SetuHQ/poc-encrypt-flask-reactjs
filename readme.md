@@ -6,13 +6,6 @@ This is a demo project on encrypted communication between UI & backend over http
 
 UI is built with reactjs and backend is a flask based api server. Encryption scheme being used: `ecies`(ECC based hybrid encryption).
 
-## Workflow:
-- Server app hosts private-key in `flask-app/keys` folder (default name `private.ec.key`), 
-- It generate public key on the go, and serve it at `/pubkey`
-- UI calls `/pubkey` to get a public key(ECC based compressed public key in base64 format)
-- For further calls UI encrypts the payload with the public key
-- On server private key is used to decrypt the payload.
-
 ![Alt text](./comm.svg)
 ## How to start:
 - Run server:
@@ -32,6 +25,12 @@ UI is built with reactjs and backend is a flask based api server. Encryption sch
     yarn start
     ```
 
+## Workflow:
+- Server app hosts private-key in `flask-app/keys` folder (default name `private.ec.key`), 
+- It generate public key on the go, and serve it at `/pubkey`
+- UI calls `/pubkey` to get a public key(ECC based compressed public key in base64 format)
+- For further calls UI encrypts the payload with the public key
+- On server private key is used to decrypt the payload.
 ## Demo example:
 - UI gets public key `GET /pubkey`, save to Local Storage
 - Get `age`, `msg` as input, create JSON payload, encrypt using Public Key, convert encrypted data to base64.
