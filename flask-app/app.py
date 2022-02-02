@@ -4,7 +4,7 @@ import uuid
 from ecies import decrypt
 import codecs
 import base64
-from key_manager import keys
+from key_manager import keys, encrypt_data
 
 
 
@@ -13,7 +13,9 @@ def create_app():
 
     @app.route("/hello")
     def hello():
-        return {'message': 'Hello Stranger!'}
+        print(f"X-Pub-Key: {request.headers['X-Pub-Key']}")
+        response_payload = {'message': 'Hello Stranger!'}
+        return encrypt_data(response_payload, request.headers['X-Pub-Key'])
 
     @app.route("/pubkey")
     def pub_key():
@@ -24,17 +26,19 @@ def create_app():
 
     @app.route('/data', methods=['POST'])
     def post_data():
+        print(f"X-Pub-Key: {request.headers['X-Pub-Key']}")
         req = request.json
         print(f"data: {req['data']}")
         data = base64.b64decode(req['data'].encode('ascii'))
         req_str = decrypt(keys.private_key.secret, data).decode('utf-8')
         req = json.loads(req_str)
-        return {
-            'id': uuid.uuid4(),
+        response = {
+            'id': str(uuid.uuid4()),
             'name': 'John Doe',
             'age': req['age'],
             'msg': req['message']
         }
+        return encrypt_data(response, request.headers['X-Pub-Key'])
 
     @app.after_request
     def enable_cors(response):
