@@ -11,7 +11,7 @@ UI is built with reactjs and backend is a flask based api server. Encryption sch
 - It generate public key on the go, and serve it at `/pubkey`
 - UI calls `/pubkey` to get a public key(ECC based compressed public key in base64 format)
 - For further calls UI encrypts the payload with the public key
-- On server provate key is used to decrypt the payload.
+- On server private key is used to decrypt the payload.
 ![your-UML-diagram-name](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://github.com/pritamprasd/poc-encrypt-flask-reactjs/blob/two_way_encryption/comm.iuml)
 
 ## How to start:

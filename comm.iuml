@@ -1,4 +1,4 @@
-@startuml diagram
+@startuml
 title Two-way encryption using ECIES
 actor user
 participant UI
