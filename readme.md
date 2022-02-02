@@ -14,6 +14,7 @@ UI is built with reactjs and backend is a flask based api server. Encryption sch
 - On server provate key is used to decrypt the payload.
 
 ```plantuml
+@startuml
 title Two-way encryption using ECIES
 actor user
 participant UI
@@ -58,6 +59,7 @@ deactivate Backend
 UI --> UI: Decrypt payload with UI_SKEY
 UI -> user: Response
 deactivate UI
+@enduml
 ```
 
 ## How to start:
