@@ -1,4 +1,3 @@
-import { decrypt } from 'ecies-wasm'
 import { encrypt, decrypt_payload, get_pub_key } from './crypto'
 export const BASE_URL = 'http://192.168.1.46:5000'
 

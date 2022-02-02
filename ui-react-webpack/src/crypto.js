@@ -9,7 +9,7 @@ export function get_pub_key() {
 
 export function encrypt(request) {
     var result = 'n/a'
-    const key_b64 = localStorage.getItem('pubkey')
+    const key_b64 = localStorage.getItem('pubkey') || '';
     try {
         const pk = Uint8Array.from(atob(key_b64), c => c.charCodeAt(0))
         const req_str = JSON.stringify(request);
