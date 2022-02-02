@@ -8,6 +8,10 @@ UI is built with reactjs and backend is a flask based api server. Encryption sch
 
 ![Alt text](./comm.svg)
 ## How to start:
+- Use docker compose. UI at: http://localhost:8999/
+
+OR
+
 - Run server:
   - Generate privyte key with `python eciespy_demo.py`, save content as `flask-app/keys/private.ec.key`
     ```sh
@@ -18,7 +22,7 @@ UI is built with reactjs and backend is a flask based api server. Encryption sch
     python app.py
     ```
 - Run UI:
-  - Update server host url in `api.js`
+  - Update server `host` url in `api.js`
     ```sh
     cd ui-react-webapck
     yarn
@@ -38,6 +42,15 @@ UI is built with reactjs and backend is a flask based api server. Encryption sch
 - Server decrypts base64 encoded payload, decrypts using private-key, send `age`, `msg` back in response.
 
 
+## Notes:
+- ecies:
+  - https://github.com/ecies
+  - uses secp256k1: 
+    - https://billatnapier.medium.com/a-bluffers-guide-to-secp256k1-404e423e612
+    - https://www.secg.org/sec2-v2.pdf :
+      - page 4: summary
+    - https://herongyang.com/EC-Cryptography/Introduction-to-Elliptic-Curves.html
+
 ## Useful Commands:
 - Create private key: `openssl ecparam -name prime256v1 -genkey -noout -out private.ec.key`
 - Create public key: `openssl ec -in private.ec.key -pubout -out public.pem`
@@ -49,3 +62,4 @@ UI is built with reactjs and backend is a flask based api server. Encryption sch
     cargo install cargo-generate
     cargo generate --git https://github.com/rustwasm/wasm-pack-template.git --name mycrypto
     ```
+

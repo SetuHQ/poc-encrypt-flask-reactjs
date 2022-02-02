@@ -1,5 +1,5 @@
 import { encrypt, decrypt_payload, get_pub_key } from './crypto'
-export const BASE_URL = 'http://192.168.1.46:5000'
+export const BASE_URL = 'http://localhost:5000'
 
 export function call_post_api(age, msg, setState) {
     fetch(BASE_URL + '/data', {

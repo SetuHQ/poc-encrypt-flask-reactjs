@@ -1,4 +1,26 @@
 version: '3.3'
 services:
-  items:
+  key-gen:
     build: ./flask-app
+    command: python3 generate_keys.py
+    volumes:
+      - keys:/app/keys
+
+  backend:
+    build: ./flask-app
+    command: python3 app.py
+    ports:
+      - 5000:5000
+    volumes:
+      - keys:/app/keys
+    depends_on:
+      - key-gen 
+
+  ui:
+    build: ./ui-react-webpack
+    ports:
+      - 8999:8999
+    depends_on:
+      - backend
+volumes:
+  keys: 

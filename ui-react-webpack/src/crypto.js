@@ -20,7 +20,7 @@ export function encrypt(request) {
         console.log("Encrypted request: " + b64_encoded);
         result = b64_encoded
     } catch (error) {
-        console.error("Error:--> " + JSON.stringify(error))
+        console.error("Error: encrypt :  " + JSON.stringify(error))
         throw error
     }
     return String(result);
@@ -36,7 +36,7 @@ export function decrypt_payload(payload) {
         console.log('Decrypted response: ' + decrypted_str)
         result = JSON.parse(decrypted_str)
     } catch (error) {
-        console.error("Error:--> " + JSON.stringify(error))
+        console.error("Error:decrypt_payload : " + JSON.stringify(error))
         throw error
     }
     return result;
